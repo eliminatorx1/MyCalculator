@@ -10,25 +10,57 @@ body{
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center; /* this will align the content vertically in the center*/
+    flex-direction: column;
+    justify-content: flex-start; /* this will align the content vertically in the center*/
     align-items: center; /* this will algin the items horizontally in the center*/
-    background: linear-gradient(45deg, #0a0a0a, #3a4452);
+    /* background: linear-gradient(45deg, #0a0a0a, #3a4452); */
+    background-color: black;
+    color: white;
 
 }
 
 /* now styling the calculator */
+h1{
+    color: white;
+    font: 500;
+    font-size: 1rem;
+    padding: 3px 5px;
+    margin-left: 10px;
+    /* color: black; */
+    
+
+}
+nav{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    margin-top: 0px;
+    background-color:#36454F;
+    width: 100%;
+    height: 3rem;
+
+    
+}
+section{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: flex-start;
+}
 .calculator{
+    margin-top: 5rem;
     border: 2px solid #717377;
     padding: 20px; /*this will provide the space around elements*/
     border-radius: 15px;
     background: transparent;
     box-shadow: 0px 3px 15px rgba(113, 115, 119, 0.5) ;
+    
 
 }
 
 input{
     width: 320px;
-    border: none;
+   
     padding: 24px;
     margin:10px;
     background:transparent;
@@ -37,14 +69,19 @@ input{
     text-align: right; /*this will put the content to the right*/
     cursor: pointer;
     color: white;
+    border-radius: 5px;
+    transition: all 1s ease-in-out;
 
 
 }
+
 
 input::placeholder{
     color: #ffffff;
+    
 
 }
+
 
 button{
     border: none;

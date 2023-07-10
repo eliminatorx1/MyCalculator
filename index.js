@@ -1,33 +1,51 @@
-let input = document.getElementById('inputBox');
-let buttons = document.querySelectorAll('button') //querySelectorAll() returns all elements that matches a css selector(s)
-//querySelectorAll() returns a NodeList
-let string = ""; //we will store our result here
-let arr = Array.from(buttons); //creating the array from the buttons
+let input = document.querySelector('input');
+let buttons = document.querySelectorAll('button');
+let string = "";
+let arr = Array.from(buttons);
 
-arr.forEach(button =>{
-    button.addEventListener('click',(e)=>{
-        if(e.target.innerHTML == '='){
-            string = eval(string); //evaluate(eval()) is an inbuilt function in javascript which will auto evaluate the string
-            input.value = string;
-        }
-        else if(e.target.innerHTML == 'AC' ){ //target property returns the element where the event occurred
-            //currentTrarget property returns the element whose event listener triggered the event
-            string ="";
-            input.value = string;
-            input.value = string;
-        }
-        else if(e.target.innerHTML == 'DEL'){
-            string = string.substring(0, string.length-1); //this will remove the last character from the string
+// input.addEventListener('click', (e) => {
+//   input.style.backgroundColor = 'blue'; // Apply blue background color to the input field when input is detected
+// });
 
-        }
-    
-        else{
-            string += e.target.innerHTML; //if the clicked button is not '=' then simply we will add the value to the string
-            input.value = string;
+arr.forEach(button => {
+  button.addEventListener('click', (e) => {
+    let operator = e.target.innerHTML;
+    input.style.border= '1px solid #3A3B3C'
+    let lastChar = string.charAt(string.length - 1);
 
-        }
-        
+    if (operator === '=') {
+      string = eval(string);
+      input.value ="Ans: "+ string;
+      input.style.border= '1px solid #E4E6EB'; // Reset the background color
+      string = String(string); // Reassign the evaluated value to the string
+    } else if (operator === 'AC') {
+      string = "";
+      input.value = string;
+      input.style.border= 'none';; // Reset the background color
+    } else if (operator === 'DEL') {
+      if (string === "") {
+        return;
+      }
+      string = string.substring(0, string.length - 1);
+      input.value = string;
+      input.style.backgroundColor = ''; // Reset the background color
+    } else {
+      if ((isOperator(lastChar) || lastChar === "") && isOperator(operator)) {
+        string += "0" + operator;
+      } else {
+        string += operator;
+      }
+      input.value = string;
+      input.style.backgroundColor = ''; // Reset the background color
+    }
+  });
+});
 
+// Add event listener to the AC button
+document.getElementById('AC').addEventListener('click', () => {
+  input.style.backgroundColor = ''; // Reset the background color
+});
 
-    })
-})
+function isOperator(char) {
+  return ['+', '-', '*', '/', '%'].includes(char);
+}
